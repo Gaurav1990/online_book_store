@@ -26,8 +26,7 @@ def is_exist_in_db(user_id):
 def login_required(f):
     @wraps(f)
     def wrap(self, request, *args, **kwargs):
-        validation_token = request.META.get('HTTP_AUTHORIZATION')
-
+        validation_token = str(request.META.get('HTTP_AUTHORIZATION'))
 
         if not validation_token:
             return Response({"error": True, "message": "There is no header. Please send authorized header key-value pairs"}, status=500)
